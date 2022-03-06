@@ -170,13 +170,21 @@ function get_header_row(sheet) {
 
 
 let findData = ()=>{
-	const jsonParam = JSON.stringify(instance.getData()
-			.map(row => {
-				let obj = {};
-				obj.name = row.name;
-				obj.jid = row.jid;
-				return obj;
-			}));
+	if(instance.getData() == null || instance.getData() == '' || instance.getData().length == 0){
+		alert('자료를 첨부하세요.');
+		return false;
+	}
+
+
+	const jsonParam = JSON.stringify(
+			instance.getData()
+					.map(row => {
+						let obj = {};
+						obj.name = row.name;
+						obj.jid = row.jid;
+						return obj;
+					})
+	);
 
 	$.ajax({
 		type : "POST",
@@ -230,9 +238,10 @@ let findData = ()=>{
 				<details>
 					<summary>메뉴 세부정보</summary>
 					<ul>
-						<li>주민번호에 대한 CI 를 취득 합니다.</li>
-						<li>첨부파일은 엑셀문서(xls,xlsx)만 가능하며, 시트에는 `A열:성명, B:주민번호` 가 작성되어 있어야 합니다.</li>
-						<span>시트 작성</span>
+						<li>주민번호에 대한 CI 값을 취득 합니다.</li>
+						<li>첨부파일은 엑셀문서(xls,xlsx)만 가능 합니다.</li>
+						<li>첨부파일의 시트에는 `A열:성명, B:주민번호` 가 작성되어 있어야 합니다.</li>
+						<span style="font-weight: bold;">[첨부파일 작성방법]</span>
 						<ul>
 							<li>1행: 컬럼명(A열:성명, B열:주민번호)</li>
 							<li>2~xxx행: 데이터</li>
@@ -255,7 +264,7 @@ let findData = ()=>{
 		<!-- 		<div id="displayExcelHtml"></div> -->
 			</div>
 			<div>
-				<input type="button" id="findBtn" value="CI 조회 하기"/>
+				<input type="button" id="findBtn" value="CI 변환 하기"/>
 			</div>
 
 			<div id="grid" class="tuigrid"></div>
