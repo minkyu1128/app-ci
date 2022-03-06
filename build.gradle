@@ -21,10 +21,23 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
     compileOnly 'org.projectlombok:lombok'
+
     annotationProcessor 'org.projectlombok:lombok'
+
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    /* =================================================================================== */
+    /* External Jar.. */
+    /* =================================================================================== */
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 tasks.named('test') {

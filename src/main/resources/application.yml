@@ -1,0 +1,36 @@
+
+spring:
+  profiles:
+    active: prod
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true #JSP ?? ? ?? ??? ?? ?? ??
+  pid:
+    file: joa.pid
+
+  logging:
+    file:
+      name: ./logs/logback.log
+    logback:
+      rollingpolicy:
+        file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
+        max-history: 30 #30??? ??
+        max-file-size:
+          100MB #????(100MB)
+    level:
+      root: info
+      '[org.hibernate.sql]': info
+
+
+# =====================================================
+# NICE ????
+# =====================================================
+nice:
+  api:
+    ci:
+      site-code:
+      site-pw:
