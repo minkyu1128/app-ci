@@ -8,9 +8,9 @@ spring:
       suffix: .jsp
   devtools:
     livereload:
-      enabled: true #JSP ?? ? ?? ??? ?? ?? ??
+      enabled: true
   pid:
-    file: joa.pid
+    file: app-ci.pid
 
   logging:
     file:
@@ -18,16 +18,16 @@ spring:
     logback:
       rollingpolicy:
         file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
-        max-history: 30 #30??? ??
+        max-history: 30
         max-file-size:
-          100MB #????(100MB)
+          100MB
     level:
       root: info
       '[org.hibernate.sql]': info
 
 
 # =====================================================
-# NICE ????
+# NICE api 계약정보
 # =====================================================
 nice:
   api:
