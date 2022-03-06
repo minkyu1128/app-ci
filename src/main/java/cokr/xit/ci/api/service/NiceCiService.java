@@ -6,7 +6,6 @@ import cokr.xit.ci.api.service.suport.Interop;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -14,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -45,15 +45,15 @@ public class NiceCiService {
 								/* ========================
 								 * validate
 								 ======================== */
-								if(StringUtils.isEmpty(siteCode)){
+								if(!Optional.ofNullable(siteCode).isPresent()){
 									responseVO = ResponseVO.builder().errCode(ErrCd.ERR401).errMsg("사이트코드(은)는 필수조건 입니다.").build();
 									throw new RuntimeException(responseVO.getErrMsg());
 								}
-								if(StringUtils.isEmpty(sitePw)){
+								if(!Optional.ofNullable(sitePw).isPresent()){
 									responseVO = ResponseVO.builder().errCode(ErrCd.ERR401).errMsg("사이트 패스워드(은)는 필수조건 입니다.").build();
 									throw new RuntimeException(responseVO.getErrMsg());
 								}
-								if(StringUtils.isEmpty(jid)){
+								if(!Optional.ofNullable(jid).isPresent()){
 									responseVO = ResponseVO.builder().errCode(ErrCd.ERR401).errMsg("서비스 구분값(주민번호:JID)(은)는 필수조건 입니다.").build();
 									throw new RuntimeException(responseVO.getErrMsg());
 								}
