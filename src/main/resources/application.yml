@@ -11,19 +11,22 @@ spring:
       enabled: true
   pid:
     file: app-ci.pid
-
-  logging:
-    file:
-      name: ./logs/logback.log
-    logback:
-      rollingpolicy:
-        file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
-        max-history: 30
-        max-file-size:
-          100MB
-    level:
-      root: info
-      '[org.hibernate.sql]': info
+  
+# =====================================================
+# Logging 설정
+# =====================================================
+logging:
+  file:
+    name: ./logs/logback.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
+      max-history: 30
+      max-file-size:
+        100MB
+  level:
+    root: info
+    '[org.hibernate.sql]': info
 
 
 # =====================================================
