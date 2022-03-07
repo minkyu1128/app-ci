@@ -23,7 +23,7 @@ function dragOver(e) {
         });
     } else {
         $(e.target).css({
-            "background-color": "gray",
+            "background-color": "#cccccc",
             "outline-offset": "-10px"
         });
     }
