@@ -274,11 +274,51 @@ let findData = ()=>{
 
 
 <script type="text/javascript">
+const options = {
+	includeHiddensColumns: true,
+	onlySelected: true,
+	delimiter: '|',
+	fileName: '주민번호 CI 변환',
+}
+let exportExcel = (format) => {
+	instance.export(format, options);
+}
+
+
+
 //import Grid from 'tui-grid'; /* ES6 */
 const Grid = tui.Grid;
 
 const instance = new Grid({
 	el: document.getElementById('grid'), // Container element
+	contextMenu: ({ rowKey, columnName }) => (
+			// 2차원 배열을 반환
+			[
+				[
+					{
+						name: 'expt',
+						label: '내보내기',
+						subMenu: [
+							{
+								name: 'subExpt1',
+								label: 'Excel',
+								action: () => {
+									exportExcel('xlsx');
+								}
+							},
+							{
+								name: 'subExpt2',
+								label: 'CSV',
+								action: () => {
+									exportExcel('csv');
+								}
+							},
+						],
+					},
+				]
+			]
+	),
+
 	// data: {
 	// 	initialRequest: false,
 	// 	api: {
