@@ -365,8 +365,9 @@ const instance = new Grid({
 		{
 			header: '성명',
 			name: 'name',
+			align: 'center',
 			editor: 'text',
-			minWidth: 100,
+			width: 150,
 			filter: 'select',
 			sortingType: 'desc',
 			sortable: true
@@ -374,8 +375,9 @@ const instance = new Grid({
 		{
 			header: '주민번호',
 			name: 'jid',
+			align: 'center',
 			editor: 'text',
-			minWidth: 100,
+			width: 150,
 			filter: 'select',
 			sortingType: 'desc',
 			sortable: true,
@@ -383,7 +385,7 @@ const instance = new Grid({
 		{
 			header: 'CI',
 			name: 'ci',
-			minWidth: 100,
+			minWidth: 300,
 			filter: 'select',
 			sortingType: 'desc',
 			sortable: true
