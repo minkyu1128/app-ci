@@ -14,7 +14,6 @@
 
 	<!-- 공통 -->
 	<link rel="stylesheet" href="/resource/css/style.css" />
-	<script defer src="/resource/js/common.js"></script>
 	<!-- Drag&Drop -->
 	<link rel="stylesheet" href="/resource/css/file-drag-and-drop.css" />
 	<script defer src="/resource/js/file-drag-and-drop.js"></script>
@@ -50,6 +49,8 @@ let excelExport = (event)=>{
 	excelExportCommon(event, handleExcelDataAll);
 }
 function excelExportCommon(event, callback){
+	document.querySelector('#lbFile').innerHTML = event.target.files[0].name;
+
     let input = event.target;
     let reader = new FileReader();
     reader.onload = function(){
@@ -171,7 +172,7 @@ function get_header_row(sheet) {
 
 let findData = ()=>{
 	if(instance.getData() == null || instance.getData() == '' || instance.getData().length == 0){
-		alert('자료를 첨부하세요.');
+		alert('파일을 첨부하세요.');
 		return false;
 	}
 
@@ -223,6 +224,22 @@ let findData = ()=>{
 	div.content{
 		margin: 10px;
 	}
+	button {
+		height:27px;
+		padding: 10px 15px 30px 15px;
+		margin: 10px;
+		background: #4f4f4f;
+		color: aliceblue;
+		border-radius:3px;
+		font-size:14px;
+		font-weight: bold;
+		display: inline-block;
+		width: auto;
+		border-color: #6a5a64;
+		text-shadow: none;
+		box-shadow: none;
+	}
+
 </style>
 
 </head>
@@ -250,6 +267,10 @@ let findData = ()=>{
 				</details>
 			</div>
 			<div class="content">
+				<span>
+					<input type="button" value="파일 첨부하기" onclick="document.querySelector('#lbFile').click(); return false;"/>
+					<label id="lbFile" for="fExcel">선택된 파일이 없습니다</label>
+				</span>
 				<input type="file" id="fExcel" name="fExcel" style="display: none;"/>
 				<div class="file-drag-and-drop">
 					<p>첨부파일(xls,xlsx)을 이곳에 올려주세요</p>
@@ -264,7 +285,9 @@ let findData = ()=>{
 		<!-- 		<div id="displayExcelHtml"></div> -->
 			</div>
 			<div>
-				<input type="button" id="findBtn" value="CI 변환 하기"/>
+				<button id="findBtn">
+					<span>CI 변환 실행</span>
+				</button>
 			</div>
 
 			<div id="grid" class="tuigrid"></div>
@@ -342,6 +365,7 @@ const instance = new Grid({
 		{
 			header: '성명',
 			name: 'name',
+			editor: 'text',
 			minWidth: 100,
 			filter: 'select',
 			sortingType: 'desc',
@@ -350,10 +374,11 @@ const instance = new Grid({
 		{
 			header: '주민번호',
 			name: 'jid',
+			editor: 'text',
 			minWidth: 100,
 			filter: 'select',
 			sortingType: 'desc',
-			sortable: true
+			sortable: true,
 		},
 		{
 			header: 'CI',

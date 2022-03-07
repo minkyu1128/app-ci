@@ -4,9 +4,9 @@
     outline-offset:-10px;
     text-align: center;
     transition: all .15s ease-in-out;
-    width: 300px;
+    width: 350px;
     height: 100px;
-    background-color: gray;
+    background-color: #cccccc;
 
     display: flex;
     flex-direction: row;
