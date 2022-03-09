@@ -27,21 +27,6 @@ window.onload = function(){
 	document.querySelector('#findBtn').addEventListener('click', findData);
 	stateDragAndDrop.callback = excelExport;	//File Drag&Drop callback 이벤트 초기화
 }
-let readExcel = ()=>{
-    let input = event.target;
-    let reader = new FileReader();
-    reader.onload = function () {
-        let data = reader.result;
-        let workBook = XLSX.read(data, { type: 'binary' });
-        workBook.SheetNames.forEach(function (sheetName) {
-            let rows = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
-        })
-    };
-    reader.readAsBinaryString(input.files[0]);
-	
-}
-
-
 
 
 let excelExport = (event)=>{
@@ -361,6 +346,10 @@ const instance = new Grid({
 	// },
 	rowHeaders: ['rowNum'],
 	bodyHeight: 450,
+	draggable: true,
+	columnOptions: {
+		resizable: true
+	},
 	columns: [
 		{
 			header: '성명',
