@@ -32,9 +32,14 @@ public class NiceCiController {
 //    public ResponseEntity<ResponseVO> ci(@RequestBody Map<String, Object> mParam) {
     public ResponseEntity<ResponseVO> ci(@RequestBody String param) {
         Gson gson = new Gson();
-        List<Map<String, String>> params = gson.fromJson(param, ArrayList.class);
+        List<Map<String, Object>> params = gson.fromJson(param, ArrayList.class);
         List<String> jids = params.stream()
-                .map(row -> row.get("jid"))
+                .map(row -> {
+                    if(row.get("jid") instanceof Double)
+                        return String.valueOf(Double.valueOf((Double) row.get("jid")).longValue());
+                    else
+                        return String.valueOf(row.get("jid"));
+                })
                 .collect(Collectors.toList());
 
         ResponseVO respVO = diCiService.findAllByJid(SITE_CODE, SITE_PW, jids);
