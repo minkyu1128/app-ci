@@ -2,7 +2,7 @@ package cokr.xit.ci.api.service;
 
 import cokr.xit.ci.api.code.ErrCd;
 import cokr.xit.ci.api.model.ResponseVO;
-import cokr.xit.ci.api.service.suport.Interop;
+import cokr.xit.ci.api.service.support.Interop;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ public class NiceCiService {
 	 * @param jids
 	 * @return
 	 */
-	public ResponseVO findAllByJid(String siteCode, String sitePw, List<String> jids) {
+	public ResponseVO findAllBySiteCodeAndSitePwAndJidIn(String siteCode, String sitePw, List<String> jids) {
 		return ResponseVO.builder()
 				.errCode(ErrCd.OK)
 				.errMsg(ErrCd.OK.getCodeNm())

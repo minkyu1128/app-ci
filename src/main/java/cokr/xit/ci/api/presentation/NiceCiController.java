@@ -42,7 +42,7 @@ public class NiceCiController {
                 })
                 .collect(Collectors.toList());
 
-        ResponseVO respVO = diCiService.findAllByJid(SITE_CODE, SITE_PW, jids);
+        ResponseVO respVO = diCiService.findAllBySiteCodeAndSitePwAndJidIn(SITE_CODE, SITE_PW, jids);
 
         return new ResponseEntity<ResponseVO>(respVO, HttpStatus.OK);
     }

@@ -1,4 +1,4 @@
-package cokr.xit.ci.api.service.suport;
+package cokr.xit.ci.api.service.support;
 
 
 import KISINFO.VNO.VNOInterop;
