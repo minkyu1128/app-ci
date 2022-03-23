@@ -65,6 +65,7 @@ details ul span{color:#686868;}
     list-style: none;
 }
 .nav .logo{
+    width: 214px;
     height: 30px;
     background-image: url(./images/logo.png);
     background-size: 128px;
@@ -79,6 +80,8 @@ details ul span{color:#686868;}
     font-size: 18px;
     padding-left: 15px;
 }
+.m-dp1{display: none;}
+
 .box_group{
     background: #fff;
     border-radius: 10px;
@@ -145,3 +148,88 @@ button:hover{
     transition: all 0.3s;
     background:#4367a6;
 }
+
+/* 미디어쿼리 */
+@media only screen and (max-width : 500px){
+    div.app-item.nav{
+        width: 100%;
+    }
+    .nav{
+        display: flex;
+    }
+    .nav .logo{
+        border: none;
+        margin: 0px;
+        background-image: url(./images/m_logo.png);
+        background-size: 52px;
+        background-position: 7px 3px;
+    }
+    .dp1 a{
+        display: none;
+    }
+    .m-dp1{
+        display: block;
+    }
+    /*인풋에 체크되기 전*/
+    #menuicon {display: none;}
+    #menuicon + label {
+        display: block;
+        /*margin: 30px;*/
+        width: 33px;
+        height: 28px;
+        /*z-index: 9999;*/
+        position: relative;
+        cursor: pointer;
+        right: -180px;
+        top: 3px;
+    }
+    #menuicon + label span{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        border-radius: 30px;
+        background: #fff;
+        transition: all .35s;
+    }
+    #menuicon + label span:nth-child(1){top:0;}
+    #menuicon + label span:nth-child(2){top:50%; transform: translateY(-50%);}
+    #menuicon + label span:nth-child(3){bottom: 0;}
+
+    /*인풋에 체크 후*/
+    #menuicon:checked + label{z-index: 17;}
+    #menuicon:checked + label span{background: #fff;}
+    #menuicon:checked + label span:nth-child(1){top:50%; transform: translateY(-50%) rotate(45deg);}
+    #menuicon:checked + label span:nth-child(2){opacity:0;}
+    #menuicon:checked + label span:nth-child(3){bottom:50%; transform: translateY(50%) rotate(-45deg);}
+
+    .m-sidebar{
+        width: 200px;
+        height: 100%;
+        background: #182e49;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        z-index: 16;
+        transition: all .35s;
+        margin-top: 8px;
+    }
+    .m-sidebar ul{list-style: none;}
+    .m-sidebar h3{
+        color:#fff;
+        padding-top: 50px;
+        padding-left: 23px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 500;
+    }
+    .m-sidebar a{
+        color: #fff;
+        display:inline-block;
+        border: 0px solid red;
+        list-style: none;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 400;
+    }
+    #menuicon:checked + label +div {right:0;}
+
+}/*삭제조심*/
