@@ -209,7 +209,7 @@ let findData = ()=>{
 	div.content{
 		margin: 10px;
 	}
-	button {
+/*	button {
 		height:27px;
 		padding: 10px 15px 30px 15px;
 		margin: 10px;
@@ -223,7 +223,7 @@ let findData = ()=>{
 		border-color: #6a5a64;
 		text-shadow: none;
 		box-shadow: none;
-	}
+	}*/
 
 </style>
 
@@ -235,45 +235,49 @@ let findData = ()=>{
 		</div>
 
 		<div class="app-item article">
-			<div class="app-container" style="align-items: center">
-				<h1>CI 변환</h1>
-				<details>
-					<summary>메뉴 세부정보</summary>
-					<ul>
-						<li>주민번호에 대한 CI 값을 취득 합니다.</li>
-						<li>첨부파일은 엑셀문서(xls,xlsx)만 가능 합니다.</li>
-						<li>첨부파일의 시트에는 `A열:성명, B:주민번호` 가 작성되어 있어야 합니다.</li>
-						<span style="font-weight: bold;">[첨부파일 작성방법]</span>
-						<ul>
-							<li>1행: 컬럼명(A열:성명, B열:주민번호)</li>
-							<li>2~xxx행: 데이터</li>
+			<div class="box_group">
+				<div class="app-container" style="align-items: center; display: block;">
+					<h1>CI 변환</h1>
+					<details>
+						<summary>메뉴 세부정보</summary>
+						<ul class="box">
+							<li>주민번호에 대한 CI 값을 취득 합니다.</li>
+							<li>첨부파일은 엑셀문서(xls,xlsx)만 가능 합니다.</li>
+							<li>첨부파일의 시트에는 `A열:성명, B:주민번호` 가 작성되어 있어야 합니다.</li>
+							<span style="font-weight: bold;">[첨부파일 작성방법]</span>
+							<ul>
+								<li>1행: 컬럼명(A열:성명, B열:주민번호)</li>
+								<li>2~xxx행: 데이터</li>
+							</ul>
 						</ul>
-					</ul>
-				</details>
-			</div>
-			<div class="content">
+					</details>
+				</div>
+				<div class="content">
 				<span>
-					<input type="button" value="파일 첨부하기" onclick="document.querySelector('#lbFile').click(); return false;"/>
+					<input type="button" value="파일 첨부하기"
+						   onclick="document.querySelector('#lbFile').click(); return false;"/>
 					<label id="lbFile" for="fExcel">선택된 파일이 없습니다</label>
 				</span>
-				<input type="file" id="fExcel" name="fExcel" style="display: none;"/>
-				<div class="file-drag-and-drop">
-					<p>첨부파일(xls,xlsx)을 이곳에 올려주세요</p>
+					<input type="file" id="fExcel" name="fExcel" style="display: none;"/>
+					<div class="file-drag-and-drop">
+						<p>첨부파일(xls,xlsx)을 이곳에 올려주세요</p>
+					</div>
+					<!-- 		<h1>Header 정보 보기</h1> -->
+					<!-- 		<div id="displayHeaders"></div> -->
+					<!-- 		<h1>JSON 형태로 보기</h1> -->
+					<!-- 		<div id="displayExcelJson"></div> -->
+					<!-- 		<h1>CSV 형태로 보기</h1> -->
+					<!-- 		<div id="displayExcelCsv"></div> -->
+					<!-- 		<h1>HTML 형태로 보기</h1> -->
+					<!-- 		<div id="displayExcelHtml"></div> -->
 				</div>
-		<!-- 		<h1>Header 정보 보기</h1> -->
-		<!-- 		<div id="displayHeaders"></div> -->
-		<!-- 		<h1>JSON 형태로 보기</h1> -->
-		<!-- 		<div id="displayExcelJson"></div> -->
-		<!-- 		<h1>CSV 형태로 보기</h1> -->
-		<!-- 		<div id="displayExcelCsv"></div> -->
-		<!-- 		<h1>HTML 형태로 보기</h1> -->
-		<!-- 		<div id="displayExcelHtml"></div> -->
+				<div>
+					<button id="findBtn">
+						<span>CI 변환 실행</span>
+					</button>
+				</div>
 			</div>
-			<div>
-				<button id="findBtn">
-					<span>CI 변환 실행</span>
-				</button>
-			</div>
+			<%--box_group 종료--%>
 
 			<div id="grid" class="tuigrid"></div>
 		</div>

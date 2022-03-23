@@ -1,12 +1,13 @@
 
 .file-drag-and-drop{
-    outline: 2px dashed #92b0b3 ;
-    outline-offset:-10px;
+    outline: 2px dashed #c1c1c1 ;
+    outline-offset:-1px;
     text-align: center;
     transition: all .15s ease-in-out;
     width: 350px;
-    height: 100px;
-    background-color: #cccccc;
+    height: 150px;
+    background-color: #f9f9f9 !important;
+    border-radius: 4px;
 
     display: flex;
     flex-direction: row;
@@ -14,5 +15,19 @@
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
+
+    background-image: url("./images/uploadFile.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center 43px;
+}
+
+.file-drag-and-drop p{
+    background-color: #f9f9f9 !important;
+    margin-top: 32px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #898989;
 }
 
