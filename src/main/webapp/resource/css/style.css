@@ -1,3 +1,12 @@
+/*웹폰트 noto-sans*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/*초기설정*/
+*{
+    border-style: none;
+    text-decoration: none;
+    color:#333;
+}
 
 html{
     font-size: 15px;
@@ -9,23 +18,130 @@ div.app-container{
 }
 div.app-item.nav{
     padding: 10px;
-    background-color: burlywood;
+    /*background-color: burlywood;*/
+    background-color: #4989e8;
     width: 14rem;
     flex-grow: 0;
 
 }
 div.app-item.article{
     padding: 10px;
-    background-color: whitesmoke;
+    /*background-color: whitesmoke;*/
+    background-color: #eff2f9;
     width: 50%;
     flex-grow: 1;
 
 }
-
+.app-container h1{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 800;
+    padding-left: 10px;
+    margin: 0px;
+    padding-top: 16px;
+}
 details {
     margin: 10px;
-}
-details > summary:hover {
+    display: inline-block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
     cursor: pointer;
-    color: blue;
+}
+details > summary{color: #898989;}
+details > summary:hover {
+    transition: all 0.3s;
+    color:#333333;
+}
+details .box{
+    border-radius: 6px;
+    padding: 10px 35px;
+    background:#f5f7fd;;
+}
+details ul li{color:#777777;}
+details ul span{color:#686868;}
+
+
+.nav{
+    padding: 0px 0px 0px 5px;
+    list-style: none;
+}
+.nav .logo{
+    height: 30px;
+    background-image: url(./images/logo.png);
+    background-size: 128px;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 10px;
+}
+.dp1 a{
+    color:#fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    padding-left: 15px;
+}
+.box_group{
+    background: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    padding-left: 26px;
+}
+#grid{
+    margin: 10px;
+}
+
+.content input{
+    border-style: none;
+    background: #c1c1c1;
+    width: 130px;
+    padding: 8px 8px 8px 27px;
+    color: #fff;
+
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-image: url(./images/arrow.png);
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: 13px 11px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+.content input:hover{
+    background: #777777;
+    transition: all 0.3s;
+    background-image: url(./images/arrow.png);
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: 13px 11px;
+}
+
+.content label{
+    border: 1px solid #c1c1c1;
+    padding: 8px;
+    color: #727272;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    border-width: 0px 0px 1px 0px;
+}
+
+button {
+    width: 115px;
+    padding:9px;
+    display: inline-block;
+    margin: 10px 10px 20px 10px;
+    background: #5a93f9;
+    border-style: none;
+    border-radius:50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size:14px;
+    cursor: pointer;
+}
+button span{
+    color:#fff;
+}
+button:hover{
+    transition: all 0.3s;
+    background:#4367a6;
 }

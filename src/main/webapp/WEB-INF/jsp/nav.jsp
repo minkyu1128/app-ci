@@ -13,6 +13,7 @@
 
 <div>
     <ul class="nav">
+        <a href="/"><li class="logo"></li></a>
         <li class="dp1">
             <a href="/">CI 변환</a>
         </li>
