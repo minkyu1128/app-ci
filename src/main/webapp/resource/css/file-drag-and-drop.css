@@ -6,7 +6,7 @@
     transition: all .15s ease-in-out;
     width: 350px;
     height: 150px;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9 !important;
     border-radius: 4px;
 
     display: flex;
@@ -23,7 +23,8 @@
 }
 
 .file-drag-and-drop p{
-    padding-top: 32px;
+    background-color: #f9f9f9 !important;
+    margin-top: 32px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 15px;
