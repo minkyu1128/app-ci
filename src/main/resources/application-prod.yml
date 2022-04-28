@@ -20,5 +20,5 @@ spring:
 nice:
   api:
     ci:
-      site-code:
-      site-pw:
+      site-code: GI72
+      site-pw: 00000000
