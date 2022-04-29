@@ -7,9 +7,9 @@ import lombok.*;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class ResponseVO {
+public class ResponseVO<T> {
     private ErrCd errCode;
     private String errMsg;
-    private Object resultInfo;
+    private T resultInfo;
 
 }

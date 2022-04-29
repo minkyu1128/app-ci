@@ -22,9 +22,11 @@ public class NiceCiController {
 
     private final NiceCiService diCiService;
 
-    @Value("${nice.api.ci.site-code ?: }")
+//    @Value("${nice.ci.socket.site-code ?: }")
+    @Value("${nice.ci.socket.site-code}")
     private String SITE_CODE;
-    @Value("${nice.api.ci.site-pw ?: }")
+//    @Value("${nice.ci.socket.site-pw ?: }")
+    @Value("${nice.ci.socket.site-pw}")
     private String SITE_PW;
 
     @SuppressWarnings("deprecation")
