@@ -31,6 +31,7 @@ public enum ErrCd {
 	, ERR603("유효하지 않은 토큰(OTT) 값")
 	, ERR610("응답 데이터에 필수값이 없음")
 	, ERR620("API Response Error")
+	, ERR699("API 기타 오류")
 	//기타오류
 	, ERR999("기타 오류")
 	, ERR901("권한 없음")

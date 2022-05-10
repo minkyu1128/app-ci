@@ -2,9 +2,11 @@ package cokr.xit.ci.api.service;
 
 import cokr.xit.ci.api.code.ErrCd;
 import cokr.xit.ci.api.model.ResponseVO;
+import cokr.xit.ci.api.service.support.NiceCiGenerator;
 import cokr.xit.ci.api.service.support.socket.Interop;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,6 +22,11 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class NiceCiService {
+
+    private final NiceCiGenerator niceCiGenerator;
+
+	@Value("${contract.nice.ci.type}")
+	private String type;
 
 	/**
 	 * 주민번호로 CI를 취득 한다.
@@ -61,7 +68,11 @@ public class NiceCiService {
 								/* ========================
 								 * api call
 								 ======================== */
-								responseVO = Interop.getCI(siteCode, sitePw, jid);
+								if("socket".equals(type)) {
+									responseVO = Interop.getCI(siteCode, sitePw, jid);
+								}else{
+                                    responseVO = niceCiGenerator.getCI(jid, null);
+								}
 
 							} catch (Exception e){
 								log.error(e.getMessage());
@@ -79,8 +90,8 @@ public class NiceCiService {
 						.collect(Collectors.toMap(m -> String.valueOf(m.get("key")), m -> m.get("value"), (k1, k2)->k1)))
 				.build();
 	}
-	
-	
+
+
 
 	/**
      * sha256 암호화
@@ -106,6 +117,6 @@ public class NiceCiService {
 
   	    return sbuf.toString();
   	}
-	
-	
+
+
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -180,4 +181,66 @@ public class DateUtil {
 		);
 	}
 
+
+	/**
+	 * 날짜(date) 사이의 간격을 계산하여 일자(day)로 반환 한다.
+	 * @param fromDate
+	 * @param toDate
+	 * @return
+	 */
+	public static int daysByFromBetweenTo(Date fromDate, Date toDate){
+		return daysByFromBetweenTo(fromDate.getTime(), toDate.getTime());
+	}
+	/**
+	 * 초(sec) 사이의 간격을 계산하여 일자(day)로 반환 한다.
+	 * @param fromSec
+	 * @param toSec
+	 * @return
+	 */
+	public static int daysByFromBetweenTo(int fromSec, int toSec){
+		return daysByFromBetweenTo(fromSec*1000L, toSec*1000L);
+	}
+	/**
+	 * 밀리초(ms) 사이의 간격을 계산하여 일자(day)로 반환 한다.
+	 * @param fromMs
+	 * @param toMs
+	 * @return
+	 */
+	public static int daysByFromBetweenTo(long fromMs, long toMs){
+		return (int) ((fromMs - toMs)/(24*60*60*1000));
+	}
+
+
+	/**
+	 * 초(sec)를 일수(day)로 반환 한다.
+	 * @return
+	 */
+	public static int secToDays(int sec){
+		return msToDays(sec*1000L);
+	}
+	/**
+	 * 밀리초(ms)를 일수(day)로 반환 한다.
+	 * @return
+	 */
+	public static int msToDays(long ms){
+		return (int) (ms/(24*60*60*1000));
+	}
+
+
+	/**
+	 * 현재날짜에 초(sec)를 더한 날짜를 반환 한다.
+	 * @param sec
+	 * @param pattern
+	 * @return
+	 */
+	public static String addSec(int sec, String pattern){
+		if("".equals(pattern)||pattern==null)
+			pattern = "yyyyMMdd";
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis((sec*1000L) + (new Date().getTime()));
+		Date date = calendar.getTime();
+
+		return new SimpleDateFormat(pattern).format(date);
+	}
 }

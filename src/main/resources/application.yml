@@ -14,6 +14,39 @@ spring:
   pid:
     file: app-ci.pid
 
+  # ===================================================================================================================================
+  # Database 설정
+  # ===================================================================================================================================
+  h2:
+    console:
+      enabled: true
+      path: /app-ci-db
+  sql:
+    init:
+      # DB 초기화(always / never). Embeded 인메모리DB는 기본적으로 초기화를 수행한다.
+      mode: always
+      # Database 벤더(h2,oracle,mysql,postgresql,...)
+      platform: h2
+  datasource:
+#    url: "jdbc:h2:tcp://localhost:19092/~/ens"
+#    url: jdbc:h2:mem:xitdb?rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999
+    url: jdbc:h2:file:c:/data/app-ci-db;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  hikari:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    jdbc-url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      # create / create-drop / update / validate / none
+      ddl-auto: update
+    open-in-view: true
+
+
 # =====================================================
 # Logging 설정
 # =====================================================
@@ -29,4 +62,26 @@ logging:
   level:
     root: info
     '[org.hibernate.sql]': info
+
+
+# =====================================================
+# NICE api 계약정보
+# =====================================================
+contract:
+  nice:
+    ci:
+      type: rest
+      socket:
+        site-code: GI72
+        site-pw: "00000000"
+      rest:
+        host: https://svc.niceapi.co.kr:22001
+        client-id: "6c3eb1ff-530d-458a-9a6e-e02e3346f679"
+        client-secret: "960f204ec45bb312b7ad2d6b54b984d9c353b8"
+        api:
+          generate-token: /digital/niceid/oauth/oauth/token
+          revoke-token: /digital/niceid/oauth/oauth/token/revokeById
+          publickey: /digital/niceid/api/v1.0/common/crypto/publickey
+          symmetrickey: /digital/niceid/api/v1.0/common/crypto/symmetrickey
+          ci: /digital/niceid/cert/v1.0/ipin/addinfo/ci
 

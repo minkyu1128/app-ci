@@ -13,21 +13,3 @@ spring:
     activate:
       on-profile: prod
 
-
-# =====================================================
-# NICE api 계약정보
-# =====================================================
-nice:
-  ci:
-    socket:
-      site-code: GI72
-      site-pw: "00000000"
-    api:
-      host: https://svc.niceapi.co.kr:22001
-      generate-token: /digital/niceid/oauth/oauth/token
-      revoke-token: /digital/niceid/oauth/oauth/revokeById
-      publickey: /digital/niceid/api/v1.0/common/crypto/publickey
-      symmetrickey: /digital/niceid/api/v1.0/common/crypto/symmetrickey
-      ci: /digital/niceid/cert/v1.0/ipin/addinfo/ci
-
-

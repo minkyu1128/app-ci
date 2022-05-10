@@ -6,13 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Optional;
 
 @Slf4j
 @ComponentScan(basePackages = "cokr.xit")
 @SpringBootApplication
-@ServletComponentScan
+//@ServletComponentScan
 public class AppCiApplication {
 
     public static void main(String[] args) {
