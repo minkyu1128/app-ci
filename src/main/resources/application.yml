@@ -28,9 +28,10 @@ spring:
       # Database 벤더(h2,oracle,mysql,postgresql,...)
       platform: h2
   datasource:
-#    url: "jdbc:h2:tcp://localhost:19092/~/ens"
+#    url: "jdbc:h2:tcp://localhost:19092/~/ci"
 #    url: jdbc:h2:mem:xitdb?rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999
-    url: jdbc:h2:file:c:/data/app-ci-db;AUTO_SERVER=TRUE
+#    url: jdbc:h2:file:C:/data${spring.h2.console.path};FILE_LOCK=NO
+    url: jdbc:h2:file:./data${spring.h2.console.path};FILE_LOCK=NO
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -41,6 +42,9 @@ spring:
     password: ${spring.datasource.password}
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
     hibernate:
       # create / create-drop / update / validate / none
       ddl-auto: update
@@ -61,7 +65,7 @@ logging:
         100MB
   level:
     root: info
-    '[org.hibernate.sql]': info
+    '[org.hibernate.sql]': debug
 
 
 # =====================================================

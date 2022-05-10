@@ -9,9 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,8 +41,8 @@ public class NiceCiService {
 				.errCode(ErrCd.OK)
 				.errMsg(ErrCd.OK.getCodeNm())
 				.resultInfo(
-						jids.stream()
-//						jids.parallelStream()
+//						jids.stream()
+						jids.parallelStream()
 						.map(jid -> {
 							ResponseVO responseVO = null;
 							try {
@@ -90,33 +87,6 @@ public class NiceCiService {
 						.collect(Collectors.toMap(m -> String.valueOf(m.get("key")), m -> m.get("value"), (k1, k2)->k1)))
 				.build();
 	}
-
-
-
-	/**
-     * sha256 암호화
-     * @param text
-     * @return
-     * @throws IOException
-     * @throws NoSuchAlgorithmException
-     */
-    public static String hexSha256(String text) throws IOException, NoSuchAlgorithmException{
-  	    StringBuffer sbuf = new StringBuffer();
-
-  	    MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
-  	    mDigest.update(text.getBytes());
-
-  	    byte[] msgStr = mDigest.digest() ;
-
-  	    for(int i=0; i < msgStr.length; i++){
-  	        byte tmpStrByte = msgStr[i];
-  	        String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100, 16).substring(1);
-
-  	        sbuf.append(tmpEncTxt) ;
-  	    }
-
-  	    return sbuf.toString();
-  	}
 
 
 }

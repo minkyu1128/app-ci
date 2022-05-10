@@ -26,6 +26,19 @@ window.onload = function(){
 	document.getElementById('fExcel').addEventListener('change', excelExport);
 	document.querySelector('#findBtn').addEventListener('click', findData);
 	stateDragAndDrop.callback = excelExport;	//File Drag&Drop callback 이벤트 초기화
+
+
+	/* ============================================== */
+	/* ==== 로딩바 ==== */
+	$( document ).ajaxStart(function() {
+		// $('html').css("cursor", "wait");	//마우스 커서를 로딩 중 커서로 변경
+		$('#loading').show();
+	});
+	$( document ).ajaxStop(function() {
+		// $('html').css("cursor", "auto");	//마우스 커서를 원래대로 돌린다
+		$('#loading').hide();
+	});
+	/* ============================================== */
 }
 
 
@@ -229,6 +242,15 @@ let findData = ()=>{
 
 </head>
 <body>
+<%--	<div id="loading" style="display: none">--%>
+<%--		<div id="loading-bar">--%>
+<%--			<img src="/resource/css/images/loading.gif">--%>
+<%--			<p style="font-size: x-large; font-width: bold;">변환 중 입니다...</p>--%>
+<%--		</div>--%>
+<%--	</div>--%>
+
+
+
 	<div class="app-container">
 		<div class="app-item nav">
 			<jsp:include page="nav.jsp"></jsp:include>
@@ -279,7 +301,16 @@ let findData = ()=>{
 			</div>
 			<%--box_group 종료--%>
 
-			<div id="grid" class="tuigrid"></div>
+			<div id="grid" class="tuigrid">
+
+				<div id="loading" style="display: none" class="inbox-screen">
+					<div id="loading-bar">
+						<img src="/resource/css/images/loading.gif">
+						<p style="font-size: x-large; font-width: bold;">변환 중 입니다...</p>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </body>
@@ -347,6 +378,7 @@ const instance = new Grid({
 	// 					return obj;
 	// 				}));
 	// 	}
+	// 	LoadingBar: false
 	// },
 	rowHeaders: ['rowNum'],
 	bodyHeight: 450,

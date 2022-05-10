@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ens_nice_ci_symkey_mng", schema = "", catalog = "")
+@Table(name = "nice_ci_symkey_mng", schema = "", catalog = "")
 @Schema(name = "NiceCiSymkeyMng",  description = "나이스 CI 대칭키 관리")
 public class NiceCiSymkeyMng {
 

@@ -233,3 +233,41 @@ button:hover{
     #menuicon:checked + label +div {right:0;}
 
 }/*삭제조심*/
+
+
+
+#loading.inbox-screen {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: block;
+    background: #ededed;
+    opacity: 0.7;
+    z-index: 99;
+    text-align: center;
+}
+#loading.inbox-screen > #loading-bar {
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-10%, 20%);
+}
+#loading.full-screen {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    background: #ededed;
+    opacity: 0.7;
+    z-index: 99;
+    text-align: center;
+}
+#loading.full-screen > #loading-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+}
