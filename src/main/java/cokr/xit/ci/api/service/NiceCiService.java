@@ -3,6 +3,7 @@ package cokr.xit.ci.api.service;
 import cokr.xit.ci.api.code.ErrCd;
 import cokr.xit.ci.api.model.ResponseVO;
 import cokr.xit.ci.api.service.support.NiceCiGenerator;
+import cokr.xit.ci.api.service.support.rest.utils.SymmetricKey;
 import cokr.xit.ci.api.service.support.socket.Interop;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,6 +39,7 @@ public class NiceCiService {
 	 * @return
 	 */
 	public ResponseVO findAllBySiteCodeAndSitePwAndJidIn(String siteCode, String sitePw, List<String> jids) {
+		AtomicInteger i = new AtomicInteger();
 		return ResponseVO.builder()
 				.errCode(ErrCd.OK)
 				.errMsg(ErrCd.OK.getCodeNm())
@@ -67,7 +70,10 @@ public class NiceCiService {
 								 ======================== */
 								if("socket".equals(type)) {
 									responseVO = Interop.getCI(siteCode, sitePw, jid);
-								}else{
+								}else if("rest".equals(type)){
+									if(0 == i.getAndIncrement())
+										if(!SymmetricKey.isValidStat())
+											niceCiGenerator.initialKey();
                                     responseVO = niceCiGenerator.getCI(jid, null);
 								}
 

@@ -45,18 +45,9 @@ public class NiceCiGenerator {
     @Value("${contract.nice.ci.rest.api.ci}")
     private String API_CI;
 
-    public ResponseVO<String> getCI(String jid, String clientIp) {
+    public ResponseVO initialKey(){
 
-        NiceCiApiExecutor executor = NiceCiApiExecutor.builder()
-                .HOST(this.HOST)
-                .CLIENT_ID(this.CLIENT_ID)
-                .CLIENT_SECRET(this.CLIENT_SECRET)
-                .API_GENERATE_TOKEN(this.API_GENERATE_TOKEN)
-                .API_REVOKE_TOKEN(this.API_REVOKE_TOKEN)
-                .API_PUBLICKEY(this.API_PUBLICKEY)
-                .API_SYMMETRICKEY(this.API_SYMMETRICKEY)
-                .API_CI(this.API_CI)
-                .build();
+        NiceCiApiExecutor executor = buildExecutor();
         try {
 
             /* ==========================================================================
@@ -74,13 +65,13 @@ public class NiceCiGenerator {
                 return ResponseVO.<String>builder().errCode(ErrCd.ERR600).errMsg(pubkeyResponseVO.getErrCode().getCode() + " " + pubkeyResponseVO.getErrMsg()).build();
 
             /* ==========================================================================
-            * 3. 대칭키 등록 요청  
+            * 3. 대칭키 등록 요청
             *   -. 대칭키는 1일 1회만 등록이 가능하며, 1일 2회 이상 등록요청 시 "0099 기타오류" 가 발생 하므로
             *   -. 등록요청에 성공한 대칭키는 DB에 저장하여, 서버 재기동 시에도 휘발되지 않도록 한다.
             ========================================================================== */
 //            NiceCiRespVO<DataBodySymkeyResp> symkeyResponseVO = executor.symkey();
 //            if (!NiceCiApiCd.OK.equals(symkeyResponseVO.getErrCode()))
-//                return ResponseVO.<String>builder().errCode(ErrCd.ERR600).errMsg(symkeyResponseVO.getErrCode().getCode() + " " + symkeyResponseVO.getErrMsg()).build();
+//                return ResponseVO.<String>errRsltBuilder().errCode(ErrCd.ERR600).errMsg(symkeyResponseVO.getErrCode().getCode() + " " + symkeyResponseVO.getErrMsg()).build();
             ObjectMapper mapper = new ObjectMapper();
             DataBodySymkeyResp dataBodySymkeyResp = null;
             if (SymmetricKey.isValidStat()) {
@@ -114,11 +105,23 @@ public class NiceCiGenerator {
                 }
             }
 
+
+            return ResponseVO.<String>builder().errCode(ErrCd.OK).errMsg(ErrCd.OK.getCodeNm()).build();
+        } catch (Exception e) {
+            return ResponseVO.<String>builder().errCode(ErrCd.ERR699).errMsg(e.getMessage()).build();
+        }
+    }
+
+    public ResponseVO<String> getCI(String jid, String clientIp) {
+
+        NiceCiApiExecutor executor = this.buildExecutor();
+        try {
+
             /* ==========================================================================
             * 4. 아이핀 CI 요청
             ========================================================================== */
             NiceCiRespVO<DataBodyCiResp> ciResponseVO = executor.ci(jid, clientIp);
-            if (!NiceCiApiCd.OK.equals(pubkeyResponseVO.getErrCode()))
+            if (!NiceCiApiCd.OK.equals(ciResponseVO.getErrCode()))
                 return ResponseVO.<String>builder().errCode(ErrCd.ERR600).errMsg(ciResponseVO.getErrCode().getCode() + " " + ciResponseVO.getErrMsg()).build();
 
 
@@ -126,5 +129,18 @@ public class NiceCiGenerator {
         } catch (Exception e) {
             return ResponseVO.<String>builder().errCode(ErrCd.ERR699).errMsg(e.getMessage()).build();
         }
+    }
+
+    private NiceCiApiExecutor buildExecutor(){
+        return NiceCiApiExecutor.builder()
+                .HOST(this.HOST)
+                .CLIENT_ID(this.CLIENT_ID)
+                .CLIENT_SECRET(this.CLIENT_SECRET)
+                .API_GENERATE_TOKEN(this.API_GENERATE_TOKEN)
+                .API_REVOKE_TOKEN(this.API_REVOKE_TOKEN)
+                .API_PUBLICKEY(this.API_PUBLICKEY)
+                .API_SYMMETRICKEY(this.API_SYMMETRICKEY)
+                .API_CI(this.API_CI)
+                .build();
     }
 }
