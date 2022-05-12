@@ -10,9 +10,7 @@ public class SymmetricKey {
 
     private volatile static SymmetricKey instance;
     private static DataBodySymkeyResp data;
-    //    private static String key;
-//    private static String version;
-    private static Long expireDt;
+//    private static Long expireDt;
 
 //    private SymkeyInfo() {
 //
@@ -31,7 +29,7 @@ public class SymmetricKey {
     private SymmetricKey(DataBodySymkeyResp data) {
         this.data = data;
 //        this.expireDt = Long.parseLong(LocalDateTime.now().plusMonths(5L).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
-        this.expireDt = Long.parseLong(LocalDateTime.now().plusDays(1L).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+//        this.expireDt = Long.parseLong(LocalDateTime.now().plusDays(1L).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
     }
 
     public static SymmetricKey getInstance() {
@@ -54,7 +52,9 @@ public class SymmetricKey {
             return false;
         if (data == null)
             return false;
-        if (expireDt < Long.parseLong(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))))
+//        if (expireDt < Long.parseLong(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))))
+        //유효기간 만료일까지 1일 미만이면..
+        if (Long.parseLong(data.getSymkeyStatInfo().getCurValidDtim()) < Long.parseLong(LocalDateTime.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))))
             return false;
 
         return true;
@@ -65,7 +65,7 @@ public class SymmetricKey {
         return data;
     }
 
-    public Long getExpireDe(){
-        return expireDt;
-    }
+//    public Long getExpireDe(){
+//        return expireDt;
+//    }
 }

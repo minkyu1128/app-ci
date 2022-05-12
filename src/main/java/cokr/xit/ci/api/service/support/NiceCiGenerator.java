@@ -18,6 +18,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Log4j2
@@ -80,11 +82,14 @@ public class NiceCiGenerator {
                 //현재 대칭키 조회(by 공개키)
                 Optional<NiceCiSymkeyMng> niceCiSymkeyMng = niceCiSymkeyMngRepository.findByPubkey(pubkeyResponseVO.getResultInfo().getPublicKey());
 
-                if (niceCiSymkeyMng.isPresent()) {
+                //대칭키 유효기간만료일이 1일 이상 남았으면
+                if (niceCiSymkeyMng.isPresent()
+                        &&(Long.parseLong(niceCiSymkeyMng.get().getExpireDt()) > Long.parseLong(LocalDateTime.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))) ) {
                     dataBodySymkeyResp = mapper.readValue(niceCiSymkeyMng.get().getRespJsonData(), DataBodySymkeyResp.class);
 
                     //대칭키 싱글톤 객체 초기화
                     SymmetricKey.getInstance(dataBodySymkeyResp);
+
 
                 } else {
                     //3. 대칭키 등록 요청
@@ -97,6 +102,7 @@ public class NiceCiGenerator {
                     niceCiSymkeyMngRepository.save(NiceCiSymkeyMng.builder()
                             .pubkey(pubkeyResponseVO.getResultInfo().getPublicKey())
                             .symkey(dataBodySymkeyResp.getKey())
+                            .expireDt(dataBodySymkeyResp.getSymkeyStatInfo().getCurValidDtim())
                             .version(dataBodySymkeyResp.getSymkeyStatInfo().getCurSymkeyVersion())
                             .iv(dataBodySymkeyResp.getIv())
                             .hmacKey(dataBodySymkeyResp.getHmacKey())

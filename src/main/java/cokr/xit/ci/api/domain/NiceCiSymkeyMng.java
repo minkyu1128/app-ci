@@ -34,6 +34,10 @@ public class NiceCiSymkeyMng {
 	@Column(nullable = false, length = 32)
 	private String symkey;
 
+	@Schema(required = false, title = "만료일시", example = " ", description = "yyyyMMddHHmmss 포맷")
+	@Column(nullable = true, length = 14)
+	private String expireDt;
+
 	@Schema(required = false, title = "버전", example = " ", description = "대칭키 현재 버전")
 	@Column(nullable = true, length = 50)
 	private String version;
