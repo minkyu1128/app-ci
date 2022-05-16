@@ -7,9 +7,12 @@
 <title>CI 변환 시스템</title>
 
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
-	<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-	<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<%--	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>--%>
+<%--	<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>--%>
+<%--	<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />--%>
+	<script src="/resource/js/xlsx.full.min.js"></script>
+	<script src="/resource/js/tui-grid.js"></script>
+	<link rel="stylesheet" href="/resource/css/tui-grid.css" />
 
 
 	<!-- 공통 -->
@@ -19,7 +22,8 @@
 	<script defer src="/resource/js/file-drag-and-drop.js"></script>
 
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<%--	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>--%>
+	<script src="/resource/js/jquery-3.4.1.min.js"></script>
 
 <script type="text/javascript">
 window.onload = function(){
