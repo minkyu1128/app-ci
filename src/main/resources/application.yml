@@ -47,8 +47,9 @@ spring:
         format_sql: true
     hibernate:
       # create / create-drop / update / validate / none
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: true
+    show-sql: true
 
 
 # =====================================================
